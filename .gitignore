@@ -1,0 +1,10 @@
+*.classpath
+*.project
+*.settings/
+*.orig
+*.swp
+*.iml
+.idea/
+*.ipr
+*.iws
+node_modules/
