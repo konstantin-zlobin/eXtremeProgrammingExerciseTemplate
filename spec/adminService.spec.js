@@ -17,7 +17,7 @@ describe('Admin Service', function () {
     });
 
     it('can add an event to the system', function () {
-        adminService.addNewEvent(
+        expect(adminService.addNewEvent(
           'New Mega Event', // title
           '20.04', // date
           '13:45', // time
@@ -30,7 +30,7 @@ describe('Admin Service', function () {
               'seat': 200,
               'enter': 100
           } // prices
-        );
+        )).toEqual(true);
 
         expect(adminService.showAllEvents()[0].title).toEqual('New Mega Event');
         expect(adminService.showAllEvents()[0].date).toEqual('20.04');
