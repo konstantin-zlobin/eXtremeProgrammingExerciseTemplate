@@ -17,6 +17,13 @@ UserService.prototype = {
         endDate = new Date();
         endDate.setMonth(endDate.getMonth() + 1);
         return this.SearchEvent(events, null, new Date(), startDate, endDate, null);
+    },
+
+    bookSimpleTicket: function(title, date, events) {
+        var event = this.SearchEvent(events, title, date, date);
+        event.simpleTicketsBooked += 1;
+        return true;
     }
+
 }
 module.exports = UserService;

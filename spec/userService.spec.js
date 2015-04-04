@@ -46,9 +46,13 @@ describe('User Service', function () {
 
     });
 
-    /*it ('can book tickets to concerts', function() {
+    it ('can book tickets to concerts', function() {
+        adminService.addNewEvent("Test Title", new Date());
+        expect(userService.bookSimpleTicket('Test Title', new Date())).toBeTruthy();
 
-    }); */
+    });
+
+
 
      it('can get next month events', function () {
          adminService.addNewEvent("Test Title", new Date());
