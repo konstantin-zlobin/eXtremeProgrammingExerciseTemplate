@@ -6,11 +6,11 @@ function AdminService() {
 
 AdminService.prototype = {
     events: null,
-    addNewEvent: function (title, date) {
-        if (_.isEmpty(title)) {
-            throw new Error("Validation error: cannot add an event with an empty Title");
-        }
-        this.events.push({title: title, date: date});
+    addNewEvent: function (event) {
+        //if (_.isEmpty(title)) {
+        //    throw new Error("Validation error: cannot add an event with an empty Title");
+        //}
+        this.events.push(event);
         //console.log("Successfully added new event!!!");
     },
     showAllEvents: function () {
