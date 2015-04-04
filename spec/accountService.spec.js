@@ -39,6 +39,13 @@ describe('Account Service', function () {
                                                      "109898976232", new Date(2012, 3, 2), "332")).toBeFalsy();
     });
 
+    it('can not buy more than 5 tickets in one transaction', function () {
+        accountService.buyTicketsByCreditCard("Test event1",
+                                                     [1, 1, 1], "Captain Obvious",
+                                                     "109898976232", new Date(2012, 3, 2), "332");
+        expect(accountService.listBoughtTickets("Test event1", new Date(2012, 3, 2), "Captain Obvious")).toEqual([1,1,1]);
+    });
+
     // it('verify overflow', function () {
     //     accountService.buyTickets("Test event", [10, 25, 100]);
 

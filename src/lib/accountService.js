@@ -14,8 +14,14 @@ function AccountService(titles) {
 
 AccountService.prototype = {
     events: null,
-    buyTicketsByCreditCard: function(title, ticketsQuantities) {
-        return _.reduce(ticketsQuantities, function(memo, num){ return memo + num; }, 0) < 5;
+    boughtTickets: {},
+    listBoughtTickets: function(title, date, customer) {
+        return this.boughtTickets[{title: title, customer: customer}];
+    } ,
+    buyTicketsByCreditCard: function(title, ticketsQuantities, customer) {
+        var result =  _.reduce(ticketsQuantities, function(memo, num){ return memo + num; }, 0) < 5;
+        this.boughtTickets[{title:title, customer: customer }] =   ticketsQuantities;
+        return result ;
     }  ,
     buyTickets: function (title, seats) {
         var free = this.showSeats(title);
