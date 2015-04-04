@@ -2,7 +2,7 @@ var _ = require('underscore');
 var EventStorage = require('./eventStorage');
 
 function AdminService() {
-    this._storage = new EventStorage()
+    this._storage = new EventStorage();
 }
 
 function validate(title, date, performers, ticketPriceVip, ticketPriceTables, ticketPriceEntrance) {
