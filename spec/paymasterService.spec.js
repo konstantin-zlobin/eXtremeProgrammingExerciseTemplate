@@ -23,7 +23,7 @@ describe('Paymaster Service', function () {
     });
 
     it('should sell ticket', function () {
-        expect(paymasterService.sell('Event 1', 'vip')).toEqual(true);
+        expect(paymasterService.sell('Event 1', 'vip')).toEqual('vip_1');
     });
 
     it('should get info about free places', function () {
@@ -37,6 +37,12 @@ describe('Paymaster Service', function () {
 
         paymasterService.sell('Event 1', 'enter');
         expect(paymasterService.getEventTicketsInfo('Event 1')).toEqual({vip: 9, table: 24, enter: 99});
+    });
+
+    it('should sell ticket', function () {
+        var id1 = paymasterService.sell('Event 1', 'vip');
+        var id2 = paymasterService.sell('Event 1', 'vip');
+        expect(id1).not.toEqual(id2);
     });
 
 });

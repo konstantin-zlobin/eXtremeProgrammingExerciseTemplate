@@ -5,8 +5,9 @@ function AdminService() {
 }
 
 function initTickets(count) {
+    var i = count;
     return Array.apply(null, Array(count)).map(function (value) {
-        return true;
+        return i--;
     })
 }
 
