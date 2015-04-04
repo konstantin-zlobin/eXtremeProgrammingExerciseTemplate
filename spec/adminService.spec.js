@@ -42,4 +42,13 @@ describe('Admin Service', function () {
         expect(_.isEmpty(adminService.showAllEvents())).toBeTruthy();
     });
 
+    it('cannot add an event with past Date to the system', function () {
+        expect(function() {
+            adminService.addNewEvent("Test Title", new Date(null),
+                                     ["Bono", "2Pac"], [1000, 500, 100]);
+        }).toThrow(
+            new Error("Validation error: cannot add an event with today date or in past"));
+        expect(_.isEmpty(adminService.showAllEvents())).toBeTruthy();
+    });
+
 });
