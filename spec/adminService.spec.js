@@ -43,11 +43,13 @@ describe('Admin Service', function () {
         });
     });
 
-    it('cannot add an event with empty Title to the system', function () {
-        expect(function() {
-            adminService.addNewEvent(undefined, new Date());
-        }).toThrow(new Error('Validation error: cannot add an event with an empty title'));
-        expect(_.isEmpty(adminService.showAllEvents())).toBeTruthy();
-    });
+    it('verify input errors', function () {
+        expect(adminService.addNewEvent()).toEqual(false);
 
+        expect(adminService.errors.title).toEqual('Validation error: cannot add an event with an empty title');
+        expect(adminService.errors.date).toEqual('Validation error: cannot add an event with an empty date');
+        expect(adminService.errors.time).toEqual('Validation error: cannot add an event with an empty time');
+        expect(adminService.errors.singers).toEqual('Validation error: cannot add an event with an empty singers');
+        expect(adminService.errors.prices).toEqual('Validation error: cannot add an event with an empty prices');
+    });
 });
