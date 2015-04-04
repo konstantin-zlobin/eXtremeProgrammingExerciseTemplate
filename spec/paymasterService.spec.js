@@ -6,7 +6,9 @@ describe('Paymaster Service', function () {
 
     function fill(paymasterService) {
         paymasterService.adminService.addNewEvent("Event 1", new Date(2015, 5, 1, 19, 0),
-            ["Bono", "2Pac"], [1000, 500, 100]);
+            ["Bono", "2Pac"], [1000, 500, 100], 'Jazz');
+        paymasterService.adminService.addNewEvent("Event 2", new Date(2015, 5, 1, 19, 0),
+            ["Bono", "2Pac"], [1000, 500, 100], 'Night Owl');
     }
 
     beforeAll(function () {
@@ -27,16 +29,20 @@ describe('Paymaster Service', function () {
     });
 
     it('should get info about free places', function () {
-        expect(paymasterService.getEventTicketsInfo('Event 1')).toEqual({vip: 10, table: 25, enter: 100});
+        expect(paymasterService.getEventTicketsInfo('Event 1')).toEqual({vip: 12, table: 0, enter: 70});
+        expect(paymasterService.getEventTicketsInfo('Event 2')).toEqual({vip: 0, table: 20, enter: 120});
 
         paymasterService.sell('Event 1', 'vip');
-        expect(paymasterService.getEventTicketsInfo('Event 1')).toEqual({vip: 9, table: 25, enter: 100});
-
-        paymasterService.sell('Event 1', 'table');
-        expect(paymasterService.getEventTicketsInfo('Event 1')).toEqual({vip: 9, table: 24, enter: 100});
+        expect(paymasterService.getEventTicketsInfo('Event 1')).toEqual({vip: 11, table: 0, enter: 70});
 
         paymasterService.sell('Event 1', 'enter');
-        expect(paymasterService.getEventTicketsInfo('Event 1')).toEqual({vip: 9, table: 24, enter: 99});
+        expect(paymasterService.getEventTicketsInfo('Event 1')).toEqual({vip: 11, table: 0, enter: 69});
+
+        paymasterService.sell('Event 2', 'table');
+        expect(paymasterService.getEventTicketsInfo('Event 2')).toEqual({vip: 0, table: 19, enter: 120});
+
+        paymasterService.sell('Event 2', 'enter');
+        expect(paymasterService.getEventTicketsInfo('Event 2')).toEqual({vip: 0, table: 19, enter: 119});
     });
 
     it('should sell ticket', function () {

@@ -2,6 +2,18 @@ var _ = require('underscore');
 
 function AdminService() {
     this.events = [];
+    this.ClubsPlaces = {
+        Jazz: {
+            'vip': initTickets(12),
+            'table': initTickets(0),
+            'enter': initTickets(70)
+        },
+        'Night Owl' : {
+            'vip': initTickets(0),
+            'table': initTickets(20),
+            'enter': initTickets(120)
+        }
+    }
 }
 
 function initTickets(count) {
@@ -14,7 +26,8 @@ function initTickets(count) {
 AdminService.prototype = {
     events: null,
 
-    addNewEvent: function (title, date, stars, price) {
+    addNewEvent: function (title, date, stars, price, club) {
+        club = club || 'Jazz';
         if (_.isEmpty(title)) {
             throw new Error("Validation error: cannot add an event with an empty Title");
         }
@@ -29,11 +42,8 @@ AdminService.prototype = {
             date: date,
             stars: stars,
             price: price,
-            tickets: {
-                'vip': initTickets(10),
-                'table': initTickets(25),
-                'enter': initTickets(100)
-            }
+            tickets: _.clone(this.ClubsPlaces[club]),
+            club: club
         });
     },
 
