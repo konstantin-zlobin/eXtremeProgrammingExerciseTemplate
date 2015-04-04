@@ -1,7 +1,8 @@
 var _ = require('underscore');
+var EventStorage = require('./eventStorage');
 
 function AdminService() {
-    this.events = [];
+    this._storage = new EventStorage()
 }
 
 function validate(title, date, performers, ticketPriceVip, ticketPriceTables, ticketPriceEntrance) {
@@ -30,15 +31,23 @@ function validate(title, date, performers, ticketPriceVip, ticketPriceTables, ti
     }
 }
 AdminService.prototype = {
-    events: null,
+    _storage: null,
+
     addNewEvent: function (title, date, performers, ticketPriceVip, ticketPriceTables, ticketPriceEntrance) {
         validate(title, date, performers, ticketPriceVip, ticketPriceTables, ticketPriceEntrance);
-        this.events.push({title: title, date: date, performers: performers,
-                             ticketPriceVip: ticketPriceVip, ticketPriceTables: ticketPriceTables, ticketPriceEntrance: ticketPriceEntrance});
+        this._storage.add({
+            title: title,
+            date: date,
+            performers: performers,
+            ticketPriceVip: ticketPriceVip,
+            ticketPriceTables: ticketPriceTables,
+            ticketPriceEntrance: ticketPriceEntrance
+        });
         //console.log("Successfully added new event!!!");
     },
+
     showAllEvents: function () {
-        return _.map(this.events, function (event) {
+        return _.map(this._storage.get(), function (event) {
             return _.clone(event);
         });
     }
