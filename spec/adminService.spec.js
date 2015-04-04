@@ -38,7 +38,7 @@ describe('Admin Service', function () {
             adminService.addNewEvent("Test Title", new Date(),
                                      ["Bono", "2Pac"], [1000, 500, 100]);
         }).toThrow(
-            new Error("Validation error: cannot add an event with today date or in past"));
+            new Error("Validation error: cannot add an event with today date or in the past"));
         expect(_.isEmpty(adminService.showAllEvents())).toBeTruthy();
     });
 
@@ -47,7 +47,7 @@ describe('Admin Service', function () {
             adminService.addNewEvent("Test Title", new Date(null),
                                      ["Bono", "2Pac"], [1000, 500, 100]);
         }).toThrow(
-            new Error("Validation error: cannot add an event with today date or in past"));
+            new Error("Validation error: cannot add an event with today date or in the past"));
         expect(_.isEmpty(adminService.showAllEvents())).toBeTruthy();
     });
 

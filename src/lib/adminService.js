@@ -14,7 +14,7 @@ AdminService.prototype = {
         dateNow.setHours(23);
         dateNow.setMinutes(60);
         if (date < dateNow) {
-            throw new Error("Validation error: cannot add an event with today date or in past");
+            throw new Error("Validation error: cannot add an event with today date or in the past");
         }
         this.events.push({title: title,
                           date: date,
