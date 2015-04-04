@@ -13,7 +13,7 @@ PaymasterService.prototype = {
     sell: function(eventTitle, type) {
         var event = this.adminService.getEventByTitle(eventTitle);
 
-        var ticketr = event.tickets[type].pop();
+        var ticket = event.tickets[type].pop();
         return ticket ?  type + '_' + ticket : ticket;
     },
 
