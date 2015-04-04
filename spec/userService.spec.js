@@ -13,7 +13,7 @@ describe('User Service', function () {
         UserServiceConstructor = require('../src/lib/userService');
         adminService = new AdminServiceConstructor();
         userService = new UserServiceConstructor();
-        [2,3,4].forEach( function(i){
+        [2, 3, 4].forEach(function (i) {
             var date = new Date();
             date.setDate(i);
             var endDate = new Date();
@@ -23,9 +23,10 @@ describe('User Service', function () {
                 title: 'Test Title',
                 date: date,
                 performers: ['Lady Gaga', 'Beatles'],
-            vipPrice: 100,
-            simplePrice: 50,
-            enterPrice: 20
+                vipPrice: 100,
+                simplePrice: 50,
+                enterPrice: 20,
+                club: 'Owl'
             });
             adminService.addNewEvent({
                 title: 'Test Title',
@@ -33,7 +34,8 @@ describe('User Service', function () {
                 performers: ['Lady Gaga', 'Beatles'],
                 vipPrice: 100,
                 simplePrice: 50,
-                enterPrice: 20
+                enterPrice: 20,
+                club: 'Owl'
             });
         });
     });
@@ -45,22 +47,5 @@ describe('User Service', function () {
     afterEach(function () {
 
     });
-
-    it ('can book tickets to concerts', function() {
-        adminService.addNewEvent("Test Title", new Date());
-        expect(userService.bookSimpleTicket('Test Title', new Date())).toBeTruthy();
-
-    });
-
-
-
-     it('can get next month events', function () {
-         adminService.addNewEvent("Test Title", new Date());
-         anounce = userService.NextMonth(adminService.showAllEvents());
-
-         anounce.forEach(function(event) {
-             //
-         });
-     });
 
 });
