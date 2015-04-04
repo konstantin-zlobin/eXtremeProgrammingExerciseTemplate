@@ -2,7 +2,7 @@ var _ = require('underscore');
 
 function AdminService() {
     this.events = [];
-    this.requiredFields = ['title', 'date', 'time', 'singers', 'prices'];
+    this.requiredFields = ['title', 'datetime', 'singers', 'prices'];
     this.errors = {};
 }
 
@@ -20,11 +20,10 @@ AdminService.prototype = {
      * @param prices
      * @returns {boolean} success
      */
-    addNewEvent: function (title, date, time, singers, prices) {
+    addNewEvent: function (title, datetime, singers, prices) {
         var event = {
             title: title,
-            date: date,
-            time: time,
+            datetime: datetime,
             singers: singers,
             prices: prices
         };
