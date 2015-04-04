@@ -3,15 +3,16 @@ var _ = require('underscore');
 describe('User Service', function () {
 
     var AdminServiceConstructor;
-    var adminService;
+    var adminService, userService;
     var currentDate = new Date();
     var nextMonthdate = new Date();
     nextMonthdate.setMonth(nextMonthdate.getMonth() + 1);
 
     beforeAll(function () {
         AdminServiceConstructor = require('../src/lib/adminService');
-        UserService = require('../src/lib/userService');
+        UserServiceConstructor = require('../src/lib/userService');
         adminService = new AdminServiceConstructor();
+        userService = new UserServiceConstructor();
         [2,3,4].forEach( function(i){
             var date = new Date();
             date.setDate(i);
@@ -38,20 +39,24 @@ describe('User Service', function () {
     });
 
     beforeEach(function () {
-        //userService = new UserServiceConstructor();
+
     });
 
     afterEach(function () {
 
     });
 
-    // it('can get next month events', function () {
-    //     //adminService.addNewEvent("Test Title", new Date());
-    //     anounce = userService.NextMonth(adminService.showAllEvents());
+    /*it ('can book tickets to concerts', function() {
 
-    //     anounce.forEach(function(event) {
-    //         //
-    //     });
-    // });
+    }); */
+
+     it('can get next month events', function () {
+         adminService.addNewEvent("Test Title", new Date());
+         anounce = userService.NextMonth(adminService.showAllEvents());
+
+         anounce.forEach(function(event) {
+             //
+         });
+     });
 
 });
