@@ -14,6 +14,9 @@ function AccountService(titles) {
 
 AccountService.prototype = {
     events: null,
+    buyTicketsByCreditCard: function(title, ticketsQuantities) {
+        return _.reduce(ticketsQuantities, function(memo, num){ return memo + num; }, 0) < 5;
+    }  ,
     buyTickets: function (title, seats) {
         var free = this.showSeats(title);
         free.forEach(

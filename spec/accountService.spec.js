@@ -27,6 +27,18 @@ describe('Account Service', function () {
         expect(free2).toEqual([0, 0, 0]);
     });
 
+    it('can buy ticket with credit card', function () {
+        expect(accountService.buyTicketsByCreditCard("Test event1",
+                                                     [1, 1, 1], "Captain Obvious",
+                                                     "109898976232", new Date(2012, 3, 2), "332")).toBeTruthy();
+    });
+
+    it('can not buy more than 5 tickets in one transaction', function () {
+        expect(accountService.buyTicketsByCreditCard("Test event1",
+                                                     [1, 1, 6], "Captain Obvious",
+                                                     "109898976232", new Date(2012, 3, 2), "332")).toBeFalsy();
+    });
+
     // it('verify overflow', function () {
     //     accountService.buyTickets("Test event", [10, 25, 100]);
 
