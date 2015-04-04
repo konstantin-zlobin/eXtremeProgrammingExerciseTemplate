@@ -10,15 +10,15 @@ PaymasterService.prototype = {
     adminService: null,
     selld: null,
 
-    sell: function(eventTitle, type) {
-        var event = this.adminService.getEventByTitle(eventTitle);
+    sell: function(eventTitle, type, club) {
+        var event = this.adminService.getEventByTitleAndClub(eventTitle, club);
 
         var ticket = event.tickets[type].pop();
         return ticket ?  type + '_' + ticket : ticket;
     },
 
-    getEventTicketsInfo: function(eventTitle) {
-        var event = this.adminService.getEventByTitle(eventTitle);
+    getEventTicketsInfo: function(eventTitle, club) {
+        var event = this.adminService.getEventByTitleAndClub(eventTitle, club);
 
         return {
             'vip': event.tickets['vip'].length,

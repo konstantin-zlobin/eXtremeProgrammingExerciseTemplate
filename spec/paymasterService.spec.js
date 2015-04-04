@@ -25,29 +25,29 @@ describe('Paymaster Service', function () {
     });
 
     it('should sell ticket', function () {
-        expect(paymasterService.sell('Event 1', 'vip')).toEqual('vip_1');
+        expect(paymasterService.sell('Event 1', 'vip', 'Jazz')).toEqual('vip_1');
     });
 
     it('should get info about free places', function () {
-        expect(paymasterService.getEventTicketsInfo('Event 1')).toEqual({vip: 12, table: 0, enter: 70});
-        expect(paymasterService.getEventTicketsInfo('Event 2')).toEqual({vip: 0, table: 20, enter: 120});
+        expect(paymasterService.getEventTicketsInfo('Event 1', 'Jazz')).toEqual({vip: 12, table: 0, enter: 70});
+        expect(paymasterService.getEventTicketsInfo('Event 2', 'Night Owl')).toEqual({vip: 0, table: 20, enter: 120});
 
-        paymasterService.sell('Event 1', 'vip');
-        expect(paymasterService.getEventTicketsInfo('Event 1')).toEqual({vip: 11, table: 0, enter: 70});
+        paymasterService.sell('Event 1', 'vip', 'Jazz');
+        expect(paymasterService.getEventTicketsInfo('Event 1', 'Jazz')).toEqual({vip: 11, table: 0, enter: 70});
 
-        paymasterService.sell('Event 1', 'enter');
-        expect(paymasterService.getEventTicketsInfo('Event 1')).toEqual({vip: 11, table: 0, enter: 69});
+        paymasterService.sell('Event 1', 'enter', 'Jazz');
+        expect(paymasterService.getEventTicketsInfo('Event 1', 'Jazz')).toEqual({vip: 11, table: 0, enter: 69});
 
-        paymasterService.sell('Event 2', 'table');
-        expect(paymasterService.getEventTicketsInfo('Event 2')).toEqual({vip: 0, table: 19, enter: 120});
+        paymasterService.sell('Event 2', 'table', 'Night Owl');
+        expect(paymasterService.getEventTicketsInfo('Event 2', 'Night Owl')).toEqual({vip: 0, table: 19, enter: 120});
 
-        paymasterService.sell('Event 2', 'enter');
-        expect(paymasterService.getEventTicketsInfo('Event 2')).toEqual({vip: 0, table: 19, enter: 119});
+        paymasterService.sell('Event 2', 'enter', 'Night Owl');
+        expect(paymasterService.getEventTicketsInfo('Event 2', 'Night Owl')).toEqual({vip: 0, table: 19, enter: 119});
     });
 
     it('should sell ticket', function () {
-        var id1 = paymasterService.sell('Event 1', 'vip');
-        var id2 = paymasterService.sell('Event 1', 'vip');
+        var id1 = paymasterService.sell('Event 1', 'vip', 'Jazz');
+        var id2 = paymasterService.sell('Event 1', 'vip', 'Jazz');
         expect(id1).not.toEqual(id2);
     });
 

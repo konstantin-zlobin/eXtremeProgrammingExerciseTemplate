@@ -47,16 +47,19 @@ AdminService.prototype = {
         });
     },
 
-    showAllEvents: function () {
-        return _.map(this.events, function (event) {
+    showAllEvents: function (club) {
+        var club = _.filter(this.events, function (event) {
+            return event.club === club;
+        });
+        return _.map(club, function (event) {
             return _.clone(event);
         });
     },
 
-    getEventByTitle: function (eventTitle) {
-        return _.filter(this.events, function(event) {
-            return event.title === eventTitle;
-        }).shift();
+    getEventByTitleAndClub: function (eventTitle, club) {
+        return _.find(this.events, function(event) {
+            return event.title === eventTitle && event.club === club;
+        });
     }
 };
 

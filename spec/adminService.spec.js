@@ -18,11 +18,11 @@ describe('Admin Service', function () {
 
     it('can add an event to the system', function () {
         adminService.addNewEvent("Test Title", new Date(2015, 5, 1, 19, 0),
-                                 ["Bono", "2Pac"], [1000, 500, 100]);
-        expect(adminService.showAllEvents()[0].title).toEqual("Test Title");
-        expect(adminService.showAllEvents()[0].date).toEqual(new Date(2015, 5, 1, 19, 0));
-        expect(adminService.showAllEvents()[0].stars).toEqual(["Bono", "2Pac"]);
-        expect(adminService.showAllEvents()[0].price).toEqual([1000, 500, 100]);
+                                 ["Bono", "2Pac"], [1000, 500, 100], 'Jazz');
+        expect(adminService.showAllEvents('Jazz')[0].title).toEqual("Test Title");
+        expect(adminService.showAllEvents('Jazz')[0].date).toEqual(new Date(2015, 5, 1, 19, 0));
+        expect(adminService.showAllEvents('Jazz')[0].stars).toEqual(["Bono", "2Pac"]);
+        expect(adminService.showAllEvents('Jazz')[0].price).toEqual([1000, 500, 100]);
     });
 
     it('cannot add an event with empty Title to the system', function () {
@@ -49,6 +49,17 @@ describe('Admin Service', function () {
         }).toThrow(
             new Error("Validation error: cannot add an event with today date or in the past"));
         expect(_.isEmpty(adminService.showAllEvents())).toBeTruthy();
+    });
+
+
+    it('can find event by title and club', function () {
+        adminService.addNewEvent("Test Title", new Date(2015, 5, 1, 19, 0),
+            ["Bono", "2Pac"], [1000, 500, 100], 'Jazz');
+        adminService.addNewEvent("Test Title 2", new Date(2015, 5, 1, 19, 0),
+            ["Bono", "2Pac"], [1000, 500, 100], 'Night Owl');
+        var eventJazz = adminService.getEventByTitleAndClub("Test Title", 'Jazz');
+        expect(eventJazz.title).toEqual("Test Title");
+        expect(eventJazz.club).toEqual("Jazz");
     });
 
 });
