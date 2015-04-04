@@ -7,14 +7,14 @@ describe('Admin Service', function () {
     var currentDate = new Date();
 
     beforeEach(function () {
-        adminService = new AdminServiceConstructor({name: 'Owl'});
+        adminService = new AdminServiceConstructor({club: 'Owl'});
     });
 
     afterEach(function () {
 
     });
 
-    xit('can add an event to the system', function () {
+    it('can add an event to the system', function () {
         //adminService.addNewEvent("Test Title", new Date());
         var date = new Date(currentDate.getMilliseconds() + 1000 * 60 * 60 * 24 * 30); // month ahead
         adminService.addNewEvent({
@@ -25,6 +25,7 @@ describe('Admin Service', function () {
             simplePrice: 50,
             enterPrice: 20
         });
+
         expect(adminService.showAllEvents()[0].title).toEqual("Test Title");
         expect(adminService.showAllEvents()[0].date).toEqual(date);
         expect(adminService.showAllEvents()[0].performers).toBeDefined();
@@ -44,8 +45,8 @@ describe('Admin Service', function () {
 
 describe('Admin Service Creation Test', function () {
     it('Should create an independent storages', function () {
-        var Jazz = new AdminServiceConstructor({name: 'Jazz', vip: 100});
-        var Owl = new AdminServiceConstructor({name: 'Night Owl', vip: 230});
+        var Jazz = new AdminServiceConstructor({club: 'Jazz', vip: 100});
+        var Owl = new AdminServiceConstructor({club: 'Night Owl', vip: 230});
 
         expect(Jazz.getTicketsInfo('vip')).toEqual(100);
         expect(Owl.getTicketsInfo('vip')).toEqual(230);

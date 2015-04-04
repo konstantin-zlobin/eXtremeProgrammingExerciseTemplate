@@ -3,7 +3,7 @@ var _ = require('underscore');
 var EventStorage = require('./eventStorage');
 
 function AdminService(options) {
-    this.club = options.name;
+    this.club = options.club;
     var defaultsOptions = {
         vip: 10,
         table: 50,
@@ -11,12 +11,10 @@ function AdminService(options) {
     };
     this.options = _.extend({}, defaultsOptions, options);
     this._storage = EventStorage;
-    this.events = [];
 }
 
 AdminService.prototype = {
     club: null,
-    events: null,
     _storage: null,
 
     addNewEvent: function (event) {
@@ -24,7 +22,7 @@ AdminService.prototype = {
     },
 
     showAllEvents: function () {
-        return _.map(this._storage.get(this.club).events, function (event) {
+        return _.map(this._storage.clubs[this.club], function (event) {
             return _.clone(event);
         });
     },
