@@ -17,7 +17,7 @@ CashierService.prototype = {
 
     getAvailablePlaces: function(eventTitle) {
 
-        return this._adminService.getEventByTitle(eventTitle).tickets;
+        return _.clone(this._adminService.getEventByTitle(eventTitle).tickets);
     }
 };
 
