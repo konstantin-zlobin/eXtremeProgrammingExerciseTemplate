@@ -25,4 +25,13 @@ describe('Cashier Service', function () {
         expect(cashierService._adminService).toBeDefined();
 
     });
+
+    it('can get list of free places', function() {
+        var date = new Date();
+        adminService.addNewEvent("Test Title", date, ["Prince", "ALisa", "Bricks"], 3.5, 2.99, 1.29);
+        var places = cashierService.getAvailablePlaces("Test Title");
+        expect(places.availableVIP).toEqual(10);
+        expect(places.availableSimple).toEqual(25);
+        expect(places.availableEntrance).toEqual(100);
+    });
 });

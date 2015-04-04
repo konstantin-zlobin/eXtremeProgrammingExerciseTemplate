@@ -43,12 +43,19 @@ AdminService.prototype = {
             ticketPriceTables: ticketPriceTables,
             ticketPriceEntrance: ticketPriceEntrance
         });
+
         //console.log("Successfully added new event!!!");
     },
 
     showAllEvents: function () {
         return _.map(this._storage.get(), function (event) {
             return _.clone(event);
+        });
+    },
+
+    getEventByTitle: function(eventTitle) {
+        return _.find(this._storage.get(), function(event){
+            return event.title === eventTitle;
         });
     }
 };

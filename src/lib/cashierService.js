@@ -15,12 +15,9 @@ CashierService.prototype = {
 
     },
 
-    getListOfSoldTickets: function() {
+    getAvailablePlaces: function(eventTitle) {
 
-    },
-
-    getListOfBookedTickets: function() {
-
+        return this._adminService.getEventByTitle(eventTitle).tickets;
     }
 };
 
