@@ -1,6 +1,6 @@
 var _ = require('underscore');
 
-describe('Admin Service', function () {
+describe('User Service', function () {
 
     var AdminServiceConstructor;
     var adminService;
